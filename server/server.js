@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
+
 const lostItemRoutes = require('./routes/server'); // Import the router
 
-require('dotenv').config();
 
 const app = express();
 
@@ -16,14 +17,18 @@ app.use(cors({
   credentials: true, // Include this if your frontend sends cookies or requires credentials
 }));
 
-const dbUri = process.env.MONGODB_URI;
-
-mongoose.connect(dbUri, {
+// Use the MongoDB URI from the .env file
+const mongoUri = process.env.MONGO_URI;
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log('Database connected!'))
-.catch(err => console.error('Database connection error:', err));
+.then(() => {
+  console.log("connected to MongoDB Atlas");
+})
+.catch(err => {
+  console.error("Failed to connect to MongoDB Atlas", err);
+});
 
 // Use the lostItems routes with a prefix
 app.use(lostItemRoutes); // Prefixing with /api
