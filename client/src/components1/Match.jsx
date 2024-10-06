@@ -6,6 +6,7 @@ const MatchNotifications = () => {
     const [matches, setMatches] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [searchTerm, setSearchTerm] = useState(''); // State for search input
 
     useEffect(() => {
         const fetchMatches = async () => {
@@ -22,6 +23,11 @@ const MatchNotifications = () => {
         fetchMatches();
     }, []);
 
+    // Filter matches by itemId based on search input
+    const filteredMatches = matches.filter((match) =>
+        match.itemId.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -33,11 +39,21 @@ const MatchNotifications = () => {
     return (
         <div className="notifications-container">
             <h2>Matched Notifications</h2>
-            {matches.length === 0 ? (
-                <div>No match notifications yet.</div>
+
+            {/* Search Input */}
+            <input
+                type="text"
+                placeholder="Search by Item ID"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
+                className="search-input"
+            />
+
+            {filteredMatches.length === 0 ? (
+                <div>No match notifications found.</div>
             ) : (
                 <ul className="notifications-list">
-                    {matches.map((match) => (
+                    {filteredMatches.map((match) => (
                         <li key={match._id} className="notification-item">
                             <strong>Email:</strong> {match.email} <br />
                             <strong>Location:</strong> {match.location} <br />

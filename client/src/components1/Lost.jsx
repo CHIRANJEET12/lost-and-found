@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './Lost1.css'; 
 import axios from 'axios';
@@ -10,7 +10,7 @@ const LostItemPage = () => {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [customLocation, setCustomLocation] = useState(''); // State for custom location input
+    const [customLocation, setCustomLocation] = useState('');
     const navigate = useNavigate(); 
 
     const handleIconClick = (item) => {
@@ -26,7 +26,7 @@ const LostItemPage = () => {
             const requestBody = {
                 itemType: selectedItem,
                 itemDescription,
-                location: customLocation, // Use custom location
+                location: customLocation,
             };
 
             console.log("Request Body:", requestBody);
@@ -48,7 +48,7 @@ const LostItemPage = () => {
                 setLoading(false);
             }
         } else {
-            setError('Please select an item type and enter a location.'); // Updated error message
+            setError('Please select an item type and enter a location.');
         }
     };
 
@@ -62,7 +62,11 @@ const LostItemPage = () => {
                     <h3>Select Item Type:</h3>
                     <div className="icons">
                         {['Wallet', 'Phone', 'Keys', 'Glasses', 'Bag', 'Watch', 'Umbrella', 'Headphones', 'Laptop', 'Camera', 'Book', 'Pet', 'Other'].map((item, index) => (
-                            <div className="icon" key={index} onClick={() => handleIconClick(item)}>
+                            <div
+                                className={`icon ${itemType === item ? 'selected' : ''}`}  // Apply 'selected' class if the item is chosen
+                                key={index}
+                                onClick={() => handleIconClick(item)}
+                            >
                                 {item === 'Other' ? '❓' : 
                                  item === 'Wallet' ? '👜' : 
                                  item === 'Phone' ? '📱' : 

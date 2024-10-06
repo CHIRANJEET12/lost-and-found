@@ -5,6 +5,7 @@ const FoundItems = () => {
     const [foundItems, setFoundItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(''); // State for search input
 
     useEffect(() => {
         const fetchFoundItems = async () => {
@@ -30,22 +31,41 @@ const FoundItems = () => {
         fetchFoundItems();
     }, []); // Empty dependency array means this effect runs once on mount
 
+    // Filter found items by itemName based on search input
+    const filteredItems = foundItems.filter(item =>
+        item.itemName.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+
     if (loading) return <div className="loading">Loading...</div>;
     if (error) return <div className="error">Error: {error}</div>;
 
     return (
         <div className="found-items-container">
             <h2>Found Items</h2>
+
+            {/* Search Input */}
+            <input
+                type="text"
+                placeholder="Search by item name"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
+                className="search-input"
+            />
+
             <ul className="found-items-list">
-                {foundItems.map(item => (
-                    <li key={item._id}> {/* Use item._id as a unique key */}
-                        <h3>{item.itemName}</h3>
-                        <p>{item.description}</p>
-                        <p>Location: {item.location}</p>
-                        <p>Contact Info: {item.contactInfo}</p>
-                        <p>Email: {item.email}</p>
-                    </li>
-                ))}
+                {filteredItems.length > 0 ? (
+                    filteredItems.map(item => (
+                        <li key={item._id}> {/* Use item._id as a unique key */}
+                            <h3>{item.itemName}</h3>
+                            <p>{item.description}</p>
+                            <p>Location: {item.location}</p>
+                            <p>Contact Info: {item.contactInfo}</p>
+                            <p>Email: {item.email}</p>
+                        </li>
+                    ))
+                ) : (
+                    <div>No items match your search.</div>
+                )}
             </ul>
         </div>
     );

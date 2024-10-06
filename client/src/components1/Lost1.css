@@ -63,6 +63,27 @@ h2 {
     margin-top: 10px;
     border-radius: 20px;
 }
+.icon {
+    font-size: 80px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+/* Darken the selected item */
+.icon.selected {
+    background-color: rgba(0, 0, 0, 0.3); /* Darken background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+    transform: scale(1.1); /* Slightly enlarge when selected */
+}
+
+/* Optional hover effect for unselected items */
+.icon:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Lighten on hover */
+}
+
 
 /* Button Styles */
 .submit-button {

@@ -2,7 +2,7 @@ import React from 'react';
 
 export const CustomNavbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary" >
       <div className="container-fluid">
         <a className="navbar-brand" href="/">FindIt</a>
         <button
