@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Match.css'; // Create a CSS file for styles if needed
+import './Match.css'; // Ensure you have a CSS file for styles
 
 const MatchNotifications = () => {
     const [matches, setMatches] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [searchTerm, setSearchTerm] = useState(''); // State for search input
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchMatches = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/match'); // Adjust this to your actual endpoint for fetching matches
-                setMatches(response.data);
+                const { data } = await axios.get('http://localhost:5000/api/match'); // Adjust this to your actual endpoint
+                setMatches(data);
             } catch (err) {
                 setError('Failed to fetch match notifications');
             } finally {
@@ -23,7 +23,6 @@ const MatchNotifications = () => {
         fetchMatches();
     }, []);
 
-    // Filter matches by itemId based on search input
     const filteredMatches = matches.filter((match) =>
         match.itemId.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -43,9 +42,9 @@ const MatchNotifications = () => {
             {/* Search Input */}
             <input
                 type="text"
-                placeholder="Search by Item ID"
+                placeholder="Search notifications by Item ID"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
+                onChange={(e) => setSearchTerm(e.target.value)} 
                 className="search-input"
             />
 

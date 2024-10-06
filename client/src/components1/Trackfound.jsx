@@ -12,7 +12,7 @@ const FoundItems = () => {
             try {
                 const response = await fetch('http://localhost:5000/api/found'); // Change port if necessary
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Failed to fetch found items');
                 }
                 const data = await response.json();
 
@@ -50,6 +50,7 @@ const FoundItems = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)} // Update search term on input change
                 className="search-input"
+                aria-label="Search by item name"
             />
 
             <ul className="found-items-list">

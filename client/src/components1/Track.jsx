@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import "./Track.css";
+import './Track.css';
 
 export const Track = () => {
   const [lostItems, setLostItems] = useState([]);
@@ -13,10 +13,10 @@ export const Track = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/lost-items');
-        setLostItems(response.data);
+        const { data } = await axios.get('http://localhost:5000/api/lost-items');
+        setLostItems(data);
       } catch (err) {
-        setError('Failed to fetch lost items');
+        setError('Failed to fetch lost items. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -58,17 +58,24 @@ export const Track = () => {
         value={searchTerm}
         onChange={handleSearch}
         className="search-input"
+        aria-label="Search by item type or description"
       />
 
       <ul className="track-list">
         {filteredItems.map((item) => (
           <li className="track-item" key={item._id}>
-            <strong>Item ID:</strong> {item._id} <br /> {/* Displaying the item ID */}
+            <strong>Item ID:</strong> {item._id} <br />
             <strong>Type:</strong> {item.itemType} <br />
             <strong>Description:</strong> {item.itemDescription} <br />
             <strong>Location:</strong> {item.location} <br />
             <hr />
-            <button onClick={() => handleMatch(item._id)} className="match-button">Matched</button>
+            <button
+              onClick={() => handleMatch(item._id)}
+              className="match-button"
+              aria-label={`Match item with ID ${item._id}`}
+            >
+              Matched
+            </button>
           </li>
         ))}
       </ul>

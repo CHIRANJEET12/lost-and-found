@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom'; 
 import './Lost1.css'; 
 import axios from 'axios';
@@ -33,7 +33,7 @@ const LostItemPage = () => {
             setLoading(true);
 
             try {
-                const response = await axios.post('http://localhost:5000/api/lost-items', requestBody);
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/lost-items`, requestBody);
                 console.log(response.data);
                 setSubmitted(true);
                 setError('');
@@ -63,7 +63,7 @@ const LostItemPage = () => {
                     <div className="icons">
                         {['Wallet', 'Phone', 'Keys', 'Glasses', 'Bag', 'Watch', 'Umbrella', 'Headphones', 'Laptop', 'Camera', 'Book', 'Pet', 'Other'].map((item, index) => (
                             <div
-                                className={`icon ${itemType === item ? 'selected' : ''}`}  // Apply 'selected' class if the item is chosen
+                                className={`icon ${itemType === item ? 'selected' : ''}`} // Apply 'selected' class if the item is chosen
                                 key={index}
                                 onClick={() => handleIconClick(item)}
                             >
