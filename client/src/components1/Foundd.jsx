@@ -26,7 +26,7 @@ const FoundItemForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/found`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}found`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
