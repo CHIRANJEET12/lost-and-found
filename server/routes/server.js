@@ -6,7 +6,7 @@ const Found = require("../models/server3"); // Found match model
 const router = express.Router();
 
 // Route to submit a lost item
-router.post('/api/lost-items', async (req, res) => {
+router.post('/lost-items', async (req, res) => {
     const { itemType, itemDescription, location } = req.body; // Include location in the request body
     try {
         const newItem = new LostItem({ itemType, itemDescription, location }); // Add location
@@ -19,7 +19,7 @@ router.post('/api/lost-items', async (req, res) => {
 });
 
 // Route to submit a location (optional, can be integrated into the lost item route)
-router.post('/api/location', async (req, res) => {
+router.post('/location', async (req, res) => {
     console.log("Incoming request body:", req.body); // Log the entire request body
     const { location, coordinates } = req.body; 
     try {
@@ -33,7 +33,7 @@ router.post('/api/location', async (req, res) => {
 });
 
 // Route to submit a found item
-router.post('/api/found', async (req, res) => {
+router.post('/found', async (req, res) => {
     const { itemName, description, location, contactInfo, email } = req.body;
 
     try {
@@ -54,7 +54,7 @@ router.post('/api/found', async (req, res) => {
 });
 
 // Route to submit a found item match
-router.post('/api/match', async (req, res) => {
+router.post('/match', async (req, res) => {
     const { email, location, itemId } = req.body;
   
     try {
@@ -67,7 +67,7 @@ router.post('/api/match', async (req, res) => {
     }
 });
 
-router.get('/api/match',async(req,res)=>{
+router.get('/match',async(req,res)=>{
     try{
         const match = await Found.find();
         res.status(200).json(match);
@@ -78,7 +78,7 @@ router.get('/api/match',async(req,res)=>{
 })
 
 // Route to fetch all lost items
-router.get('/api/lost-items', async (req, res) => {
+router.get('/lost-items', async (req, res) => {
     try {
         const items = await LostItem.find();
         res.status(200).json(items);
@@ -89,7 +89,7 @@ router.get('/api/lost-items', async (req, res) => {
 });
 
 // Route to fetch all locations (if still needed)
-router.get('/api/location', async (req, res) => {
+router.get('/location', async (req, res) => {
     try {
         const locations = await Location.find();
         res.status(200).json(locations);
@@ -100,7 +100,7 @@ router.get('/api/location', async (req, res) => {
 });
 
 // Route to fetch all found items
-router.get('/api/found', async (req, res) => {
+router.get('/found', async (req, res) => {
     try {
         const foundItems = await FoundItem.find();
         res.status(200).json(foundItems);
