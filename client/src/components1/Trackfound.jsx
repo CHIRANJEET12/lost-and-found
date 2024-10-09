@@ -10,7 +10,7 @@ const FoundItems = () => {
     useEffect(() => {
         const fetchFoundItems = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/found'); // Change port if necessary
+                const response = await fetch('${import.meta.env.VITE_API_URL}found'); // Change port if necessary
                 if (!response.ok) {
                     throw new Error('Failed to fetch found items');
                 }
