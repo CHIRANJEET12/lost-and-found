@@ -11,7 +11,7 @@ const MatchNotifications = () => {
     useEffect(() => {
         const fetchMatches = async () => {
             try {
-                const { data } = await axios.get('${import.meta.env.VITE_API_URL}match'); // Adjust this to your actual endpoint
+                const { data } = await axios.get(`${import.meta.env.VITE_API_URL}match`); // Adjust this to your actual endpoint
                 setMatches(data);
             } catch (err) {
                 setError('Failed to fetch match notifications');
