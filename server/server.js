@@ -12,7 +12,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow only your frontend origin
+  origin: 'https://lost-and-found-21.onrender.com/', // Allow only your frontend origin
   methods: 'GET,POST,PUT,DELETE', // Specify allowed methods
   credentials: true, // Include this if your frontend sends cookies or requires credentials
 }));
