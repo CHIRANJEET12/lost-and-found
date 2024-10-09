@@ -21,7 +21,7 @@ const Found = () => {
     };
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/match`, requestBody); // Update the API URL
+      await axios.post(`${import.meta.env.VITE_API_URL}match`, requestBody); // Update the API URL
       setSuccess('Details submitted successfully!');
       setError('');
       setTimeout(() => {
