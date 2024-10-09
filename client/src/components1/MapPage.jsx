@@ -68,7 +68,7 @@ const MapPage = () => {
         };
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/location`, { // Updated URL
+            const response = await fetch(`${import.meta.env.VITE_API_URL}location`, { // Updated URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
