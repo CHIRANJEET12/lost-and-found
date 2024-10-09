@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { About } from './About';
 import { useNavigate } from 'react-router-dom';
-import  Footer  from './Footer';
+import  Footer  from './Footer1';
 import './Hero.css';
 
 export const Hero = () => {
