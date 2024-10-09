@@ -13,7 +13,7 @@ export const Track = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('${import.meta.env.VITE_API_URL}lost-items');
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}lost-items`);
         setLostItems(data);
       } catch (err) {
         setError('Failed to fetch lost items. Please try again later.');
